@@ -1,0 +1,37 @@
+🔹 Angular File Types & Purpose
+
+Type	       File Example	                             Purpose
+
+Component	   header.component.ts + .html + .scss      UI part (page or reusable element)	Should not handle data fetching directly; uses services
+Service	       user.service.ts	                        Business logic, API calls, state management	Use @Injectable({ providedIn: 'root' }) for global access
+Module	       app.module.ts or dashboard.module.ts     Groups components, services, and routing	Can create feature modules for large apps
+Routing	       app-routing.module.ts	                Defines app routes	Each main route can have its own routing file (lazy-loading possible)
+Model	       user.model.ts	                        Defines data structure/interfaces	Used by components & services for type safety
+Shared	       shared.module.ts	                        Reusable components, directives, pipes	Imported in feature modules as needed
+
+🔹 Recommended Project Structure
+src/app/
+│
+├── app.component.ts
+├── app.module.ts
+├── app-routing.module.ts
+│
+├── core/                  ← core services, guards, interceptors
+│   └── services/user.service.ts
+│
+├── shared/                ← reusable UI elements
+│   ├── card/
+│   └── button/
+│
+├── features/              ← feature modules
+│   ├── dashboard/
+│   │   ├── dashboard.component.ts
+│   │   ├── dashboard.component.html
+│   │   └── dashboard.module.ts
+│   └── profile/
+│       ├── profile.component.ts
+│       ├── profile.component.html
+│       └── profile.module.ts
+│
+└── models/
+    └── user.model.ts
