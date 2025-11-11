@@ -32,12 +32,13 @@ export class AuthService {
         const token = 'fake-jwt-token-' + Date.now();
         const user: User = {
           id: 1,
-          name: 'John Doe',
+          name: 'm',
           email: email,
           avatar: 'https://via.placeholder.com/150'
         };
 
         localStorage.setItem('authToken', token);
+        localStorage.setItem('user', JSON.stringify(user));
 
         this.authState$.next({
           isAuthenticated: true,
@@ -53,6 +54,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
     this.authState$.next({
       isAuthenticated: false,
       user: null,
@@ -67,12 +69,7 @@ export class AuthService {
   private fetchUserData(token: string): void {
     // Simulate fetching user data
     setTimeout(() => {
-      const user: User = {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@example.com',
-        avatar: 'https://via.placeholder.com/150'
-      };
+      const user: User = JSON.parse(localStorage.getItem('user') || '{}');
       this.authState$.next({
         isAuthenticated: true,
         user,

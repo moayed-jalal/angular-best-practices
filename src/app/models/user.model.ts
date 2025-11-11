@@ -16,3 +16,24 @@ export interface AuthState {
   user: User | null;
   token: string | null;
 }
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}
+
+export interface Todo {
+  id: number;
+  title: string;
+  description: string;
+  status: 'pending' | 'in_progress' | 'completed';
+}
+
+export interface Admin {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User, UserState } from '../models/user.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class UserService {
     data: null,
     error: null
   });
-
-  constructor() {}
+  
+  constructor(private authService: AuthService) {}
 
   getUserState(): Observable<UserState> {
     return this.state$.asObservable();
@@ -26,13 +27,12 @@ export class UserService {
     // Simulate API call
     setTimeout(() => {
       try {
-        const user: User = {
-          id: 1,
-          name: 'John Doe',
-          email: 'john@example.com',
-          avatar: 'https://via.placeholder.com/150'
-        };
-        this.state$.next({ loading: false, data: user, error: null });
+        this.state$.next({ loading: false, data: {
+          id: 0,
+          name: "",
+          email: "",
+          avatar: ""
+        }, error: null });
       } catch (error) {
         this.state$.next({ loading: false, data: null, error: 'Failed to load user data' });
       }

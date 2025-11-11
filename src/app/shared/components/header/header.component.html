@@ -9,13 +9,19 @@
         <a routerLink="/login" class='text-sm font-medium text-white hover:text-gray-300'>Login</a>
       </div>
       <!-- Authenticated -->
-      <div *ngIf="authState.isAuthenticated && authState.user" class='flex items-center space-x-2'>
-        <img *ngIf="authState.user.avatar" [src]="authState.user.avatar" alt="User Avatar" class='w-8 h-8 rounded-full'>
-        <div class='text-sm'>
-          <div class='font-medium'>{{ authState.user.name }}</div>
-          <div class='text-gray-300'>{{ authState.user.email }}</div>
+      <div *ngIf="authState.isAuthenticated && authState.user" class='flex items-center space-x-4'>
+        <a routerLink="/dashboard" class='text-sm font-medium text-white hover:text-gray-300'>Dashboard</a>
+        <a routerLink="/products" class='text-sm font-medium text-white hover:text-gray-300'>Products</a>
+        <a routerLink="/todos" class='text-sm font-medium text-white hover:text-gray-300'>Todos</a>
+        <a routerLink="/admins" class='text-sm font-medium text-white hover:text-gray-300'>Admins</a>
+        <div class='flex items-center space-x-2 ml-4'>
+          <img *ngIf="authState.user.avatar" [src]="authState.user.avatar" alt="User Avatar" class='w-8 h-8 rounded-full'>
+          <div class='text-sm'>
+            <div class='font-medium'>{{ authState.user.name }}</div>
+            <div class='text-gray-300'>{{ authState.user.email }}</div>
+          </div>
+          <button (click)="logout()" class='ml-4 text-sm font-medium text-white hover:text-gray-300'>Logout</button>
         </div>
-        <button (click)="logout()" class='ml-4 text-sm font-medium text-white hover:text-gray-300'>Logout</button>
       </div>
     </div>
   </div>
